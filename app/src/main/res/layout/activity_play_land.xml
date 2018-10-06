@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light2"
+    android:layoutDirection="rtl"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/RLVideoViewLand"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <VideoView
+            android:id="@+id/videoViewLand"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center" />
+
+        <ProgressBar
+            android:id="@+id/pBarPlayControlLand"
+            android:layout_width="75dp"
+            android:layout_height="73dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/primaryColor" />
+
+        <LinearLayout
+            android:id="@+id/LLplayControlLand"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/circle_light"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgPlayControlLand"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_play" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LLRefreshVideoLand"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/circle_light"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_refresh" />
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/CVQueControlLand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LLplayControlLand"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="8dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="کیفیت : "
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/txt_normal_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtAuto"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/que_border"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="پایین"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/txt_normal_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtMediume"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/que_border"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="متوسط"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/txt_normal_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtHigh"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/que_border"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="بالا"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/txt_normal_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+</LinearLayout>
