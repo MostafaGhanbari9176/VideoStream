@@ -4,4 +4,5 @@ public class StGrouping {
     public int id;
     public String name;
     public String sign;
+    public String img;
 }

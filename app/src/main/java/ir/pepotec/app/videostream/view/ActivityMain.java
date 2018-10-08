@@ -1,9 +1,9 @@
 package ir.pepotec.app.videostream.view;
 
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
+import android.graphics.drawable.TransitionDrawable;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -18,19 +18,17 @@ import android.view.View;
 import android.widget.ImageView;
 
 
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import ir.pepotec.app.videostream.G;
 import ir.pepotec.app.videostream.R;
 import ir.pepotec.app.videostream.model.struct.StChannel;
 import ir.pepotec.app.videostream.view.fragment_channel_list.FragmentChannelList;
-import ir.pepotec.app.videostream.view.play.ActivityPlayLand;
 
 
 public class ActivityMain extends AppCompatActivity implements View.OnClickListener {
 
+    public static boolean editeMode = false;
     ImageView btnSearch;
     Toolbar tlb;
     ImageView btnBookMark;
@@ -38,10 +36,18 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
     public static int gsubId = -1;
     public static StChannel playData;
     public static int currentPage = -1;
-    public static int currentGrootId = 0;
+    public static int currentGrootId = 2;
     public static int currentGrootPosition = 0;
     public static boolean homeShow = true;
     FragmentSearch FSearch;
+    ImageView btnEditeMode;
+    public static String pPath = "";
+
+    public interface OnResultListener{
+        void dataFromActivity(Intent data, int reqCode);
+    }
+
+    public static OnResultListener onResultListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +70,8 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                FSearch.settingUpList(charSequence.toString());
+                if (FSearch != null)
+                    FSearch.settingUpList(charSequence.toString());
             }
 
             @Override
@@ -74,9 +81,12 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    public static void StarterActivity(Class aClass) {
+    public static void StarterActivity(Class aClass, boolean result) {
         Intent intent = new Intent(G.context, aClass);
-        G.activity.startActivity(intent);
+        if (!result)
+            G.activity.startActivity(intent);
+        else
+            G.activity.startActivityForResult(intent, 1);
     }
 
     private void pointers() {
@@ -84,7 +94,9 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         btnBookMark = findViewById(R.id.btnBookMarkCollection);
         txtSearch = findViewById(R.id.txtSearch);
         tlb = findViewById(R.id.tlb);
+        btnEditeMode = findViewById(R.id.btnEditMode);
 
+        btnEditeMode.setOnClickListener(this);
         btnBookMark.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
     }
@@ -103,11 +115,19 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
+
         txtSearch.setVisibility(View.GONE);
         if (!homeShow) {
             homeShow = true;
             getSupportActionBar().show();
             replacePage(new FragmentChannelList());
+        } else if (editeMode) {
+            changeTollBarColor();
+            editeMode = false;
+            homeShow = true;
+            replacePage(new FragmentChannelList());
+            btnBookMark.setVisibility(View.VISIBLE);
+            btnSearch.setVisibility(View.VISIBLE);
         } else
             showSnackBar();
     }
@@ -133,7 +153,7 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnSearch:
-                G.animatingForVisible(txtSearch, 0, 1);
+                G.animatingForVisible(txtSearch);
                 homeShow = false;
                 currentPage = FragmentChannelList.viewPager.getCurrentItem();
                 FSearch = new FragmentSearch();
@@ -145,7 +165,32 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
                 currentPage = FragmentChannelList.viewPager.getCurrentItem();
                 replacePage(new FragmentFavorait());
                 break;
+            case R.id.btnEditMode:
+                homeShow = true;
+                editeMode = true;
+                btnBookMark.setVisibility(View.GONE);
+                btnSearch.setVisibility(View.GONE);
+                txtSearch.setVisibility(View.GONE);
+                currentPage = FragmentChannelList.viewPager.getCurrentItem();
+                replacePage(new FragmentChannelList());
+                changeTollBarColor();
+                break;
         }
+    }
+
+    private void changeTollBarColor() {
+        TransitionDrawable transition = (TransitionDrawable) tlb.getBackground();
+        transition.reverseTransition(400);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null){
+            onResultListener.dataFromActivity(data, requestCode);
+        }
+
     }
 
     /* private void playVideo(String url) {

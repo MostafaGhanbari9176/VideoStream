@@ -7,6 +7,9 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryLightColor</item>
+        <item name="android:textSize">@dimen/txt_normal_size</item>
+        <item name="android:textColor">@color/dark</item>
     </style>
+
 
 </resources>

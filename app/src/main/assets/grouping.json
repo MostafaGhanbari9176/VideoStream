@@ -1,6 +1,11 @@
 ﻿[
   {
     "id": "0",
+    "name": "add",
+    "sign": "add"
+  },
+  {
+    "id": "0",
     "name": "سراسری",
     "sign": "root"
   },

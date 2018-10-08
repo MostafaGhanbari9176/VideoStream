@@ -1,12 +1,15 @@
 package ir.pepotec.app.videostream.view.play;
 
+import android.app.ActionBar;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -39,10 +42,37 @@ public class ActivityPlayLand extends AppCompatActivity implements View.OnClickL
     TextView txtMediume;
     TextView txtHighe;
     String url;
+    final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_FULLSCREEN
+            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT < 16) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+            this.getWindow().getDecorView().setSystemUiVisibility(flags);
+            // Code below is to handle presses of Volume up or Volume down.
+            // Without this, after pressing volume buttons, the navigation bar will
+            // show up and won't hide
+            final View decorView = this.getWindow().getDecorView();
+            decorView
+                    .setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+
+                        @Override
+                        public void onSystemUiVisibilityChange(int visibility) {
+                            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                                decorView.setSystemUiVisibility(flags);
+                            }
+                        }
+                    });
+        }
         setContentView(R.layout.activity_play_land);
         init();
     }
@@ -116,7 +146,7 @@ public class ActivityPlayLand extends AppCompatActivity implements View.OnClickL
                 public boolean onError(MediaPlayer mp, int what, int extra) {
                     pBar.setVisibility(View.GONE);
                     refresh.setVisibility(View.VISIBLE);
-                    Toast.makeText(G.context, "خطا هنگام پخش", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityPlayLand.this, "خطا هنگام پخش", Toast.LENGTH_SHORT).show();
                     return false;
                 }
             });
@@ -124,7 +154,7 @@ public class ActivityPlayLand extends AppCompatActivity implements View.OnClickL
         } catch (Exception e) {
             pBar.setVisibility(View.GONE);
             refresh.setVisibility(View.VISIBLE);
-            Toast.makeText(G.context, "خطا هنگام پخش", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "خطا هنگام پخش", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -207,12 +237,12 @@ public class ActivityPlayLand extends AppCompatActivity implements View.OnClickL
         playControlParent.animate().cancel();
         playControlParent.clearAnimation();
         if (withAnim)
-            G.animatingForGone(playControlParent, 1f, 0f);
+            G.animatingForHide(playControlParent, 1f, 0f);
         else
             playControlParent.setAlpha(1);
         queControl.animate().cancel();
         queControl.clearAnimation();
-        G.animatingForGone(queControl, 1f, 0f);
+        G.animatingForHide(queControl, 1f, 0f);
     }
 
     private void hidePlayControl() {

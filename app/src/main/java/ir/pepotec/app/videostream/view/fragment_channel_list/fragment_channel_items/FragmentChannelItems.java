@@ -22,16 +22,19 @@ import ir.pepotec.app.videostream.view.date.DateCreator;
 import ir.pepotec.app.videostream.view.play.FragmentPlay;
 import ir.pepotec.app.videostream.view.fragment_channel_list.FragmentChannelList;
 
-public class FragmentChannelItems extends Fragment implements AdapterChannels.OnChannelItemClick{
+public class FragmentChannelItems extends Fragment implements AdapterChannels.OnChannelItemClick {
     View view;
     RecyclerView list;
     TextView txtEmpty;
-    ArrayList<StChannel> source = FragmentChannelList.pageData;
+    public ArrayList<StChannel> source /*= FragmentChannelList.pageData*/;
+    public int grootId;
+    public int srootId;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_channel_items, container, false);
-       init();
+        init();
         return view;
     }
 
@@ -41,12 +44,12 @@ public class FragmentChannelItems extends Fragment implements AdapterChannels.On
     }
 
     private void settingUpList() {
-        if(source.size() == 0){
+        if ((source == null || source.size() == 0 ) && !ActivityMain.editeMode) {
             txtEmpty.setVisibility(View.VISIBLE);
             return;
         }
-        AdapterChannels adapter = new AdapterChannels(G.context, source, this);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(G.context, LinearLayoutManager.VERTICAL,false);
+        AdapterChannels adapter = new AdapterChannels(G.context, source, this, grootId, srootId);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(G.context, LinearLayoutManager.VERTICAL, false);
         list.setLayoutManager(manager);
         list.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -59,7 +62,7 @@ public class FragmentChannelItems extends Fragment implements AdapterChannels.On
 
     @Override
     public void channelItemClicked(int position) {
-        LocalDataBase.changeSeenDate(G.context, DateCreator.todayDate(),source.get(position).id);
+        LocalDataBase.changeSeenDate(G.context, DateCreator.todayDate(), source.get(position).id);
         ActivityMain.currentPage = FragmentChannelList.viewPager.getCurrentItem();
         ActivityMain.gsubId = source.get(position).gsub_id;
         ActivityMain.playData = source.get(position);

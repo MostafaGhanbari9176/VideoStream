@@ -10,6 +10,7 @@ public class StChannel {
     public int gsub_id;
     public int vpn;
     public String last_seen;
+    public String img;
     public int counter;
     public int favorait;
 }

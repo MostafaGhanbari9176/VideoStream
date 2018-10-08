@@ -28,7 +28,6 @@ public class FragmentChannelList extends Fragment implements AdapterGroot.grootI
     View view;
     public static ViewPager viewPager;
     TabLayout tabLayout;
-    public static ArrayList<StChannel> pageData;
     ArrayList<StGrouping> groupSource = new ArrayList<>();
 
     @Nullable
@@ -49,9 +48,12 @@ public class FragmentChannelList extends Fragment implements AdapterGroot.grootI
         tabLayout.setupWithViewPager(viewPager);
         AdapterPages adapter = new AdapterPages(getChildFragmentManager());
         ArrayList<StGrouping> subGroup = LocalDataBase.getGropuping(G.context, "sub");
-        for (int i = subGroup.size()-1; i >= 0; i--) {
-            pageData = LocalDataBase.getChannels(G.context, grootId, subGroup.get(i).id);
-            adapter.addPage(subGroup.get(i).name, new FragmentChannelItems());
+        for (int i = subGroup.size() - 1; i >= 0; i--) {
+            FragmentChannelItems f = new FragmentChannelItems();
+            f.grootId = grootId;
+            f.srootId = subGroup.get(i).id;
+            f.source = LocalDataBase.getChannels(G.context, grootId, subGroup.get(i).id);
+            adapter.addPage(subGroup.get(i).name, f);
         }
         viewPager.setAdapter(adapter);
         if (pagePosition == -1)

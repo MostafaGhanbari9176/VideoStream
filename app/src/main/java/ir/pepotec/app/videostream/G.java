@@ -6,6 +6,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -17,6 +18,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -31,31 +33,36 @@ public class G extends Application {
     public static Context context;
     public static AppCompatActivity activity;
     public static SharedPreferences preferences;
+
     @Override
     public void onCreate() {
         super.onCreate();
         context = this;
         preferences = context.getSharedPreferences("PePoTec", MODE_PRIVATE);
-        String s = stData("channels.json");
-        if(!(Pref.getBollValue(PrefKey.createDB, false))) {
+
+        /**/
+        Pref.saveBollValue(PrefKey.createDB, false);
+        /**/
+        if (!(Pref.getBollValue(PrefKey.createDB, false))) {
             LocalDataBase.removeDB(G.context);
+            String s = stData("channels.json");
             createChannelDB(s);
             s = stData("grouping.json");
             createGroupDB(s);
-            Pref.saveBollValue(PrefKey.createDB,true);
+            Pref.saveBollValue(PrefKey.createDB, true);
         }
-/*        ArrayList<StChannel> result = LocalDataBase.getChannels(this,1,1);
-        ArrayList<StGrouping>result2 = LocalDataBase.getGropuping(context,"root");
-        int i = 0;*/
+        ArrayList<StChannel> result = LocalDataBase.getChannels(this, 0, 2);
+        ArrayList<StGrouping> result2 = LocalDataBase.getGropuping(context, "root");
+        int i = 0;
     }
 
     private void createGroupDB(String JData) {
         JsonParser parser = new JsonParser();
         Object o = parser.parse(JData);
-        JsonArray array = (JsonArray)o;
+        JsonArray array = (JsonArray) o;
         ArrayList<StGrouping> dataSource = new ArrayList<>();
-        for(JsonElement JElement : array){
-            JsonObject data = (JsonObject)JElement;
+        for (JsonElement JElement : array) {
+            JsonObject data = (JsonObject) JElement;
             StGrouping stGrouping = new StGrouping();
             stGrouping.id = (data.get("id")).getAsInt();
             stGrouping.name = (data.get("name")).getAsString();
@@ -65,13 +72,13 @@ public class G extends Application {
         LocalDataBase.saveGroupings(this, dataSource);
     }
 
-    private void createChannelDB(String JData){
+    private void createChannelDB(String JData) {
         JsonParser parser = new JsonParser();
         Object o = parser.parse(JData);
-        JsonArray array = (JsonArray)o;
+        JsonArray array = (JsonArray) o;
         ArrayList<StChannel> dataSource = new ArrayList<>();
-        for(JsonElement JElement : array){
-            JsonObject data = (JsonObject)JElement;
+        for (JsonElement JElement : array) {
+            JsonObject data = (JsonObject) JElement;
             StChannel stChannel = new StChannel();
             stChannel.id = (data.get("id")).getAsInt();
             stChannel.name = (data.get("name")).getAsString();
@@ -83,7 +90,7 @@ public class G extends Application {
             dataSource.add(stChannel);
         }
         LocalDataBase.saveChannels(this, dataSource);
-        }
+    }
 
     private String stData(String filename) {
         StringBuilder text = new StringBuilder();
@@ -104,36 +111,71 @@ public class G extends Application {
         }
     }
 
-    public static void steImage(Context context, String imgName, ImageView imgView){
+    public static void setImage(Context context, String imgName, ImageView imgView) {
         Glide.with(context)
                 .load(getImage(context, imgName))
+                .apply(new RequestOptions().error(R.drawable.channel_do))
                 .into(imgView);
     }
 
-    private static int getImage(Context context,String imageName) {
+    public static void setImageFromPhone(Context context, String path, ImageView imgView) {
+        Glide.with(context)
+                .load(new File(path))
+                .apply(new RequestOptions().error(R.drawable.channel_do))
+                .into(imgView);
+
+    }
+
+    private static int getImage(Context context, String imageName) {
 
         return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
     }
 
-    public static void animatingForGone(final View view, float firstAlpha, float lastAlpha) {
+    public static void animatingForHide(final View view, float firstAlpha, float lastAlpha) {
         view.setAlpha(firstAlpha);
         view.animate()
                 .alpha(lastAlpha)
                 .setDuration(5000);
-        }
+    }
 
-    public static void animatingForVisible(final View view, float firstAlpha, float lastAlpha) {
-        view.setAlpha(firstAlpha);
-        view.setVisibility(View.VISIBLE);
+    public static void animatingForGone(final View view) {
+
+        view.setAlpha(1f);
         view.animate()
-                .alpha(lastAlpha)
+                .alpha(0f)
                 .setDuration(300)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
+                        view.setVisibility(View.GONE);
                         super.onAnimationEnd(animation);
-                        view.setVisibility(View.VISIBLE);
                     }
                 });
+    }
+
+    public static void animatingForVisible(final View view) {
+        view.setAlpha(0f);
+        view.setVisibility(View.VISIBLE);
+        view.animate()
+                .alpha(1f)
+                .setDuration(300)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        view.setVisibility(View.VISIBLE);
+                        super.onAnimationEnd(animation);
+                    }
+                });
+
+    }
+
+    public static void animatingToCenter(View view){
+        DisplayMetrics metrics = new DisplayMetrics();
+        G.activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int screenWidth = metrics.widthPixels;
+        screenWidth = screenWidth/2;
+        view.animate()
+                .translationX(50f)
+                .setDuration(300);
     }
 }

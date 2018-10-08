@@ -1,11 +1,20 @@
 ﻿[
   {
     "id": 0,
+    "name": "add",
+    "hd": 0,
+    "url": "add",
+    "rootg_id": 0,
+    "roots_id": 0,
+    "vpn": 0
+  },
+  {
+    "id": 0,
     "name": "یک",
     "hd": 1,
     "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:tv1/chunklist_b307200_slFa.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tv1-300k.stream/chunklist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tv1-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",
-    "rootg_id": 0,
-    "roots_id": 2,
+    "rootg_id": 2,
+    "roots_id": 4,
     "vpn": 0
   },
   {
@@ -13,8 +22,8 @@
     "name": "BBC persion",
     "hd": 1,
     "url": "[{\"url\": \"http://bbcwshdlive01-lh.akamaihd.net/i/ptv_1@78015/index_192_av-p.m3u8?sd=10&rebase=on\",\"qu\": \"auto\"},{\"url\": \"http://bbcwshdlive01-lh.akamaihd.net/i/ptv_1@78015/index_800_av-p.m3u8?sd=10&rebase=on\",\"qu\": \"medium\"},{\"url\": \"empty\",\"qu\": \"high\"}]",
-    "rootg_id": 1,
-    "roots_id": 3,
+    "rootg_id": 3,
+    "roots_id": 5,
     "vpn": 1
   },
   {
@@ -22,8 +31,8 @@
     "name": "خبر",
     "hd": 1,
     "url": "[ {\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:irinn/chunklist_b307200_slFa.m3u8\", \"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/irinn-300k.stream/chunklist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/irinn-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",
-    "rootg_id": 0,
-    "roots_id": 3,
+    "rootg_id": 2,
+    "roots_id": 5,
     "vpn": 0
   },
   {
@@ -31,128 +40,128 @@
     "name": "DN TV",
     "hd": 0,
     "url": "[ {\"url\": \"http://51.15.238.115/hls/stream.m3u8\", \"qu\": \"auto\"},{\"url\": \"empty\",\"qu\": \"medium\"},{\"url\": \"empty\",\"qu\": \"high\"}]",
-    "rootg_id": 1,
-    "roots_id": 2,
+    "rootg_id": 3,
+    "roots_id": 4,
     "vpn": 0
   },{
   "id": 4,
   "name": "دو",
   "hd": 1,
   "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:tv2/chunklist_b307200_slFa.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tv2-300k.stream/chunklist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tv2-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",
-  "rootg_id": 0,
-  "roots_id": 2,
+  "rootg_id": 2,
+  "roots_id": 4,
   "vpn": 0
 },{
   "id": 5,
   "name": "سه",
   "hd": 1,
   "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:tv3/chunklist_b307200_slFa.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tv3-300k.stream/chunklist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tv3-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",
-  "rootg_id": 0,
-  "roots_id": 2,
+  "rootg_id": 2,
+  "roots_id": 4,
   "vpn": 0
 },{
   "id": 6,
   "name": "چهار",
   "hd": 1,
   "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:tv4/chunklist_b307200_slFa.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tv4-300k.stream/chunklist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tv4-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",
-  "rootg_id": 0,
-  "roots_id": 2,
+  "rootg_id": 2,
+  "roots_id": 4,
   "vpn": 0
 },{
   "id": 7,
   "name": "پنج",
   "hd": 1,
   "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:tv5/chunklist_b307200_slFa.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tv5-300k.stream/chunklist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tv5-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",
-  "rootg_id": 0,
-  "roots_id": 2,
+  "rootg_id": 2,
+  "roots_id": 4,
   "vpn": 0
 },{
   "id": 8,
   "name": "شما",
   "hd": 1,
   "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:shoma/chunklist_b307200_slFa.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/shoma-300k.stream/chunklist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/shoma-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",
-  "rootg_id": 0,
-  "roots_id": 2,
+  "rootg_id": 2,
+  "roots_id": 4,
   "vpn": 0
 },{
   "id": 9,
   "name": "نسیم",
   "hd": 1,
   "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:nasim/chunklist_b307200_slFa.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/nasim-300k.stream/chunklist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/nasim-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",
-  "rootg_id": 0,
-  "roots_id": 2,
+  "rootg_id": 2,
+  "roots_id": 4,
   "vpn": 0
 },{
   "id": 10,
   "name": "مستند",
   "hd": 1,
   "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:mostanad/chunklist_b307200_slFa.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/mostanad-300k.stream/playlist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/mostanad-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",
-  "rootg_id": 0,
-  "roots_id": 4,
+  "rootg_id": 2,
+  "roots_id": 6,
   "vpn": 0
 },{
   "id": 11,
   "name": "ورزش",
   "hd": 1,
   "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:varzesh/chunklist_b307200_slFa.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/varzesh-300k.stream/playlist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/varzesh-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",
-  "rootg_id": 0,
-  "roots_id": 5,
+  "rootg_id": 2,
+  "roots_id": 7,
   "vpn": 0
 },{
   "id": 12,
   "name": "رادیو جوان",
   "hd": 1,
   "url": "[{\"url\": \"http://198.98.181.244/live/smil:rjtv.smil/chunklist_w605705784_b2892000.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://198.98.181.244/live/smil:rjtv.smil/chunklist_w1312572050_b1992000.m3u8\",\"qu\": \"medium\"},{\"url\": \"empty\",\"qu\": \"high\"}]",
-  "rootg_id": 1,
-  "roots_id": 6,
+  "rootg_id": 3,
+  "roots_id": 8,
   "vpn": 0
 },{
   "id": 13,
   "name": "iFilmAr",
   "hd": 0,
   "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/ifilmar-300k.stream/chunklist.m3u8\",\"qu\": \"auto\"},{\"url\": \"empty\",\"qu\": \"medium\"},{\"url\": \"empty\",\"qu\": \"high\"}]",
-  "rootg_id": 1,
-  "roots_id": 7,
+  "rootg_id": 3,
+  "roots_id": 9,
   "vpn": 0
 },{
   "id": 14,
   "name": "تماشا",
   "hd": 1,
   "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:tamasha/chunklist_b307200_slFa.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tamasha-300k.stream/playlist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tamasha-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",
-  "rootg_id": 0,
-  "roots_id": 7,
+  "rootg_id": 2,
+  "roots_id": 9,
   "vpn": 0
 },{
   "id": 15,
   "name": "آی فیلم",
   "hd": 1,
   "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:ifilmfa/chunklist_b307200_slFa.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/ifilmfa-300k.stream/playlist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/ifilmfa-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",
-  "rootg_id": 0,
-  "roots_id": 7,
+  "rootg_id": 2,
+  "roots_id": 9,
   "vpn": 0
 },{
   "id": 16,
   "name": "TIN TV",
   "hd": 0,
   "url": "[{\"url\": \"http://66.160.192.250:8080/tasviriran-TVBOXHD.COM/tin/tracks-v1a1/index.m3u8\",\"qu\": \"auto\"},{\"url\": \"empty\",\"qu\": \"medium\"},{\"url\": \"empty\",\"qu\": \"high\"}]",
-  "rootg_id": 1,
-  "roots_id": 2,
+  "rootg_id": 3,
+  "roots_id": 4,
   "vpn": 0
 },{
   "id": 17,
   "name": "AdSport1",
   "hd": 1,
   "url": "[{\"url\": \"http://adtv.ercdn.net/adsport1/adsport1_360p.m3u8\",\"qu\": \"auto\"},{\"url\": \"empty\",\"qu\": \"medium\"},{\"url\": \"empty\",\"qu\": \"high\"}]",
-  "rootg_id": 1,
-  "roots_id": 5,
+  "rootg_id": 3,
+  "roots_id": 7,
   "vpn": 0
 },{
   "id": 18,
   "name": "DeporTv",
   "hd": 1,
   "url": "[{\"url\": \"http://186.33.227.195/DXTV/DXTV.smil/chunklist_w256786845_b800000_slesp.m3u8\",\"qu\": \"auto\"},{\"url\": \"empty\",\"qu\": \"medium\"},{\"url\": \"empty\",\"qu\": \"high\"}]",
-  "rootg_id": 1,
-  "roots_id": 5,
+  "rootg_id": 3,
+  "roots_id": 7,
   "vpn": 0
 }
 ]

@@ -1,8 +1,8 @@
 package ir.pepotec.app.videostream.view.play;
 
-import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -57,6 +57,7 @@ public class FragmentPlay extends Fragment implements AdapterChannels.OnChannelI
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_play, container, false);
         init();
+        // This work only for android 4.4+
         return view;
     }
 
@@ -189,21 +190,21 @@ public class FragmentPlay extends Fragment implements AdapterChannels.OnChannelI
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.txtAutop:
-                showPlayControl(false);
+               // showPlayControl(false);
                 txtAuto.setBackgroundResource(R.drawable.que_border_selected);
                 txtHighe.setBackgroundResource(R.drawable.que_border);
                 txtMediume.setBackgroundResource(R.drawable.que_border);
                 settingUpPlayer(txtAuto.getHint().toString());
                 break;
             case R.id.txtMediumep:
-                showPlayControl(false);
+               // showPlayControl(false);
                 txtAuto.setBackgroundResource(R.drawable.que_border);
                 txtHighe.setBackgroundResource(R.drawable.que_border);
                 txtMediume.setBackgroundResource(R.drawable.que_border_selected);
                 settingUpPlayer(txtMediume.getHint().toString());
                 break;
             case R.id.txtHighp:
-                showPlayControl(false);
+               // showPlayControl(false);
                 txtAuto.setBackgroundResource(R.drawable.que_border);
                 txtHighe.setBackgroundResource(R.drawable.que_border_selected);
                 txtMediume.setBackgroundResource(R.drawable.que_border);
@@ -224,7 +225,7 @@ public class FragmentPlay extends Fragment implements AdapterChannels.OnChannelI
             case R.id.imgRotation:
                 if (videoView.isPlaying())
                     videoControl();
-                ActivityMain.StarterActivity(ActivityPlayLand.class);
+                ActivityMain.StarterActivity(ActivityPlayLand.class, false);
                 break;
             case R.id.RLVideoView:
                 if (playControlParent.getAlpha() != 0)
@@ -267,7 +268,7 @@ public class FragmentPlay extends Fragment implements AdapterChannels.OnChannelI
         playControlParent.animate().cancel();
         playControlParent.clearAnimation();
         if (withAnim)
-            G.animatingForGone(playControlParent, 1f, 0f);
+            G.animatingForHide(playControlParent, 1f, 0f);
         else
             playControlParent.setAlpha(1);
     }

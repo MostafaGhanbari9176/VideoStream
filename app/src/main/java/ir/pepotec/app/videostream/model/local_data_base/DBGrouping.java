@@ -17,6 +17,7 @@ public class DBGrouping extends SQLiteOpenHelper {
     private String column1 = "id";
     private String column2 = "name";
     private String column3 = "sign";
+    private String column4 = "img";
     private Context context;
 
 
@@ -30,7 +31,7 @@ public class DBGrouping extends SQLiteOpenHelper {
 
         db.execSQL(" CREATE TABLE " +
                 tableName
-                + " (" + column1 + " INTEGER , " + column2 + " TEXT, " + column3 + " TEXT )");
+                + " (" + column1 + " INTEGER PRIMARY KEY AUTOINCREMENT , " + column2 + " TEXT, " + column3 + " TEXT , "+ column4 +" TEXT )");
     }
 
     @Override
@@ -41,12 +42,25 @@ public class DBGrouping extends SQLiteOpenHelper {
     public void saveData(ArrayList<StGrouping> data) {
         SQLiteDatabase writer = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        for (StGrouping d : data ) {
-            contentValues.put(column1, d.id);
+        for (StGrouping d : data) {
+            //contentValues.put(column1, d.id);
             contentValues.put(column2, d.name);
             contentValues.put(column3, d.sign);
             writer.insert(tableName, null, contentValues);
         }
+        writer.close();
+    }
+
+    public void saveData(StGrouping d) {
+        SQLiteDatabase writer = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        //contentValues.put(column1, d.id);
+        contentValues.put(column2, d.name);
+        contentValues.put(column3, d.sign);
+        contentValues.put(column4, d.img);
+        writer.insert(tableName, null, contentValues);
+
         writer.close();
     }
 
@@ -60,6 +74,7 @@ public class DBGrouping extends SQLiteOpenHelper {
                 data.id = cursor.getInt(cursor.getColumnIndex(column1));
                 data.name = cursor.getString(cursor.getColumnIndex(column2));
                 data.sign = cursor.getString(cursor.getColumnIndex(column3));
+                data.img = cursor.getString(cursor.getColumnIndex(column4));
                 dataList.add(data);
             } while (cursor.moveToNext());
         }
@@ -67,7 +82,7 @@ public class DBGrouping extends SQLiteOpenHelper {
         return dataList;
     }
 
-    public void removeDataBase(){
+    public void removeDataBase() {
         SQLiteDatabase sqlWrite = this.getWritableDatabase();
         context.deleteDatabase(sqlWrite.getPath());
         sqlWrite.close();

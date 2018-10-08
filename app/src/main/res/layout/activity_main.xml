@@ -15,6 +15,7 @@
         >
 
         <android.support.v7.widget.Toolbar
+            android:background="@drawable/color_transition_primary_light"
             android:id="@+id/tlb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -39,17 +40,25 @@
                     android:id="@+id/btnSearch"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/ic_search"
-                  />
+                    app:srcCompat="@drawable/ic_search" />
 
                 <ImageView
                     android:id="@+id/btnBookMarkCollection"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:layout_marginEnd="20dp"
 
+                    android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp"
-                    android:src="@drawable/ic_collections_bookmark" />
+                    app:srcCompat="@drawable/ic_collections_bookmark" />
+
+                <ImageView
+                    android:id="@+id/btnEditMode"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/circle_light"
+                    android:padding="4dp"
+                    app:srcCompat="@drawable/ic_add" />
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
 

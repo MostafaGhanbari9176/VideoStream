@@ -24,6 +24,7 @@ public class DBChannels extends SQLiteOpenHelper {
     private String column8 = "last_seen";
     private String column9 = "counter";
     private String column10 = "favorait";
+    private String column11 = "img";
     private Context context;
 
 
@@ -37,7 +38,7 @@ public class DBChannels extends SQLiteOpenHelper {
 
         db.execSQL(" CREATE TABLE " +
                 tableName
-                + " (" + column1 + " INTEGER , " + column2 + " TEXT , " + column3 + " INTEGER , " + column4 + " TEXT , " + column5 + " INTEGER , " + column6 + " INTEGER , " + column7 + " INTEGER , " + column8 + " INTEGER , " + column9 + " INTEGER , " + column10 + " INTEGER )");
+                + " (" + column1 + " INTEGER PRIMARY KEY AUTOINCREMENT , " + column2 + " TEXT , " + column3 + " INTEGER , " + column4 + " TEXT , " + column5 + " INTEGER , " + column6 + " INTEGER , " + column7 + " INTEGER , " + column8 + " INTEGER , " + column9 + " INTEGER , " + column10 + " INTEGER , "+column11+" TEXT )");
         //db.execSQL("CREATE UNIQUE INDEX pk_index ON " + tableName + "(" + column1 + "," + column2 + ")");
     }
 
@@ -50,7 +51,7 @@ public class DBChannels extends SQLiteOpenHelper {
         SQLiteDatabase writer = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         for (StChannel d : data) {
-            contentValues.put(column1, d.id);
+            //contentValues.put(column1, d.id);
             contentValues.put(column2, d.name);
             contentValues.put(column3, d.hd);
             contentValues.put(column4, d.url);
@@ -62,6 +63,25 @@ public class DBChannels extends SQLiteOpenHelper {
             contentValues.put(column10, d.favorait);
             writer.insert(tableName, null, contentValues);
         }
+        writer.close();
+    }
+
+    public void saveData(StChannel d) {
+        SQLiteDatabase writer = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(column2, d.name);
+        contentValues.put(column3, d.hd);
+        contentValues.put(column4, d.url);
+        contentValues.put(column5, d.groot_id);
+        contentValues.put(column6, d.gsub_id);
+        contentValues.put(column7, d.vpn);
+        contentValues.put(column8, d.last_seen);
+        contentValues.put(column9, d.counter);
+        contentValues.put(column10, d.favorait);
+        contentValues.put(column11, d.img);
+        writer.insert(tableName, null, contentValues);
+
         writer.close();
     }
 
@@ -86,6 +106,7 @@ public class DBChannels extends SQLiteOpenHelper {
                 data.last_seen = cursor.getString(cursor.getColumnIndex(column8));
                 data.counter = cursor.getInt(cursor.getColumnIndex(column9));
                 data.favorait = cursor.getInt(cursor.getColumnIndex(column10));
+                data.img = cursor.getString(cursor.getColumnIndex(column11));
                 dataList.add(data);
             } while (cursor.moveToNext());
         }

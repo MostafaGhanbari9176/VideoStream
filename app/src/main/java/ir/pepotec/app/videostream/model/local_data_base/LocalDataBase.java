@@ -33,11 +33,19 @@ public class LocalDataBase {
         (new DBChannels(context)).saveData(data);
     }
 
+    public static void saveChannels(Context context, StChannel data){
+        (new DBChannels(context)).saveData(data);
+    }
+
     public static ArrayList<StGrouping> getGropuping(Context context, String sign){
         return  (new DBGrouping(context)).getData(sign);
     }
 
     public static void saveGroupings(Context context, ArrayList<StGrouping> data){
+        (new DBGrouping(context)).saveData(data);
+    }
+
+    public static void saveGroupings(Context context, StGrouping data){
         (new DBGrouping(context)).saveData(data);
     }
 
