@@ -28,8 +28,6 @@ import ir.pepotec.app.videostream.view.activityFiles.ActivityFiles;
 public class AdapterGroot extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ActivityMain.OnResultListener {
 
 
-
-
     public interface grootItemsClicked {
         void grootItemClicked(int position);
     }
@@ -38,8 +36,10 @@ public class AdapterGroot extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private ArrayList<StGrouping> source = new ArrayList<>();
     private grootItemsClicked grootItemsClicked;
     private Holder lastHolder = null;
+    private int lastPosition = -1;
     private TextView txtSubject;
-    private StGrouping stGrouping = new StGrouping();;
+    private StGrouping stGrouping = new StGrouping();
+
     private ImageView dialogImg;
 
     public AdapterGroot(Context context, ArrayList<StGrouping> source, grootItemsClicked grootItemsClicked) {
@@ -61,11 +61,10 @@ public class AdapterGroot extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int i) {
 
-        if (holder.getItemViewType() == 1){
+        if (holder.getItemViewType() == 1) {
             StGrouping item = source.get(i);
             ((Holder) holder).onBind(item, i);
-        }
-        else
+        } else
             ((HolderAdd) holder).onBind();
 
 
@@ -81,17 +80,25 @@ public class AdapterGroot extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public int getItemCount() {
         if (ActivityMain.editeMode)
-            return source.size()+1;
+            return source.size() + 1;
         return source.size();
     }
 
 
-    private void changeBacground(Holder newHolder) {
+    private void changeBacground(Holder newHolder, int position) {
         if (lastHolder != null)
             lastHolder.imageParent.setBackgroundResource(R.drawable.circle);
         newHolder.imageParent.setBackgroundResource(R.drawable.selected_circle);
         lastHolder = newHolder;
+        lastPosition = position;
 
+    }
+
+    private void stableBackground(Holder holder, int position) {
+        if (lastHolder != null && position == lastPosition)
+            holder.imageParent.setBackgroundResource(R.drawable.selected_circle);
+        else
+            holder.imageParent.setBackgroundResource(R.drawable.circle);
     }
 
     public class Holder extends RecyclerView.ViewHolder {
@@ -112,17 +119,18 @@ public class AdapterGroot extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             final Holder holder = this;
             if (itemData.id == 1 && !ActivityMain.editeMode)
                 item.setVisibility(View.GONE);
-            if(itemData.img == null)
-            G.setImage(context, "g" + itemData.id, img);
+            if (itemData.img == null)
+                G.setImage(context, "g" + itemData.id, img, false);
             else
-                G.setImageFromPhone(context, itemData.img, img);
+                G.setImageFromPhone(context, itemData.img, img, false);
             txt.setText(itemData.name);
             if (position == ActivityMain.currentGrootPosition && lastHolder == null)
-                changeBacground(holder);
+                changeBacground(holder, position);
+            stableBackground(holder, position);
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    changeBacground(holder);
+                    changeBacground(holder, position);
                     grootItemsClicked.grootItemClicked(position);
                 }
             });
@@ -150,7 +158,7 @@ public class AdapterGroot extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private void getGroupDataDialog() {
         final Dialog dialog = new Dialog(context);
         LayoutInflater LI = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = LI.inflate(R.layout.dialog_add_grouping, null , false);
+        View view = LI.inflate(R.layout.dialog_add_grouping, null, false);
         (view.findViewById(R.id.btnCancellGroupDialog)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,15 +187,15 @@ public class AdapterGroot extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     private void getData(Dialog dialog) {
-        if(TextUtils.isEmpty(txtSubject.getText().toString().trim()))
-        {
+        if (TextUtils.isEmpty(txtSubject.getText().toString().trim())) {
             txtSubject.setError("عنوان گروه را وارد کنید.");
             txtSubject.requestFocus();
-        }else{
+        } else {
             stGrouping.name = txtSubject.getText().toString().trim();
             stGrouping.sign = "root";
             LocalDataBase.saveGroupings(context, stGrouping);
             Toast.makeText(context, "افزوده شد", Toast.LENGTH_SHORT).show();
+            stGrouping.img = null;
             dialog.cancel();
 
         }
@@ -197,7 +205,7 @@ public class AdapterGroot extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void dataFromActivity(Intent data, int reqCode) {
         stGrouping.img = data.getStringExtra("path");
         dialogImg.setVisibility(View.VISIBLE);
-        G.setImageFromPhone(context,stGrouping.img, dialogImg);
+        G.setImageFromPhone(context, stGrouping.img, dialogImg, false);
     }
 
 }

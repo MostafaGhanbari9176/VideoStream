@@ -166,6 +166,10 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
                 replacePage(new FragmentFavorait());
                 break;
             case R.id.btnEditMode:
+                if(editeMode) {
+                    onBackPressed();
+                    break;
+                }
                 homeShow = true;
                 editeMode = true;
                 btnBookMark.setVisibility(View.GONE);

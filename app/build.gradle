@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
-
+android.defaultConfig.vectorDrawables.useSupportLibrary = true
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "ir.pepotec.app.videostream"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 28
-        versionCode 1
+        versionCode 2
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

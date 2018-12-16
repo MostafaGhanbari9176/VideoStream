@@ -1,15 +1,6 @@
 ﻿[
   {
     "id": 0,
-    "name": "add",
-    "hd": 0,
-    "url": "add",
-    "rootg_id": 0,
-    "roots_id": 0,
-    "vpn": 0
-  },
-  {
-    "id": 0,
     "name": "یک",
     "hd": 1,
     "url": "[{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/smil:tv1/chunklist_b307200_slFa.m3u8\",\"qu\": \"auto\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tv1-300k.stream/chunklist.m3u8\",\"qu\": \"medium\"},{\"url\": \"http://cdn1.live.irib.ir:1935/channel-live/tv1-1mb.stream/chunklist.m3u8\",\"qu\": \"high\"}]",

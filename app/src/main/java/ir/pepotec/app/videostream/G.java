@@ -41,7 +41,7 @@ public class G extends Application {
         preferences = context.getSharedPreferences("PePoTec", MODE_PRIVATE);
 
         /**/
-        Pref.saveBollValue(PrefKey.createDB, false);
+        //Pref.saveBollValue(PrefKey.createDB, false);
         /**/
         if (!(Pref.getBollValue(PrefKey.createDB, false))) {
             LocalDataBase.removeDB(G.context);
@@ -51,9 +51,9 @@ public class G extends Application {
             createGroupDB(s);
             Pref.saveBollValue(PrefKey.createDB, true);
         }
-        ArrayList<StChannel> result = LocalDataBase.getChannels(this, 0, 2);
+/*        ArrayList<StChannel> result = LocalDataBase.getChannels(this, 0, 2);
         ArrayList<StGrouping> result2 = LocalDataBase.getGropuping(context, "root");
-        int i = 0;
+        int i = 0;*/
     }
 
     private void createGroupDB(String JData) {
@@ -111,17 +111,27 @@ public class G extends Application {
         }
     }
 
-    public static void setImage(Context context, String imgName, ImageView imgView) {
+    public static void setImage(Context context, String imgName, ImageView imgView, boolean tv) {
+        RequestOptions requestOptions = new RequestOptions();
+        if(tv)
+            requestOptions.error(R.drawable.tv).fitCenter();
+        else
+            requestOptions.error(R.drawable.group).fitCenter();
         Glide.with(context)
                 .load(getImage(context, imgName))
-                .apply(new RequestOptions().error(R.drawable.channel_do))
+                .apply(requestOptions)
                 .into(imgView);
     }
 
-    public static void setImageFromPhone(Context context, String path, ImageView imgView) {
+    public static void setImageFromPhone(Context context, String path, ImageView imgView, boolean tv) {
+        RequestOptions requestOptions = new RequestOptions();
+        if(tv)
+            requestOptions.error(R.drawable.tv).fitCenter();
+        else
+            requestOptions.error(R.drawable.group).fitCenter();
         Glide.with(context)
                 .load(new File(path))
-                .apply(new RequestOptions().error(R.drawable.channel_do))
+                .apply(requestOptions)
                 .into(imgView);
 
     }

@@ -118,9 +118,9 @@ public class AdapterChannels extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         private void onBind(final int position, StChannel itemDate) {
             if (itemDate.img == null)
-                G.setImage(context,"12",img);
+                G.setImage(context,"12",img, true);
             else
-                G.setImageFromPhone(context, itemDate.img, img);
+                G.setImageFromPhone(context, itemDate.img, img,true);
             txtName.setText(itemDate.name);
             if (itemDate.hd == 0)
                 imgHD.setVisibility(View.GONE);
@@ -165,7 +165,7 @@ public class AdapterChannels extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void getChannelDataDialog() {
-        Toast.makeText(context, source.size() + "", Toast.LENGTH_SHORT).show();
+
         final Dialog dialog = new Dialog(context);
         LayoutInflater LI = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = LI.inflate(R.layout.dialog_add_channel, null, false);
@@ -220,6 +220,7 @@ public class AdapterChannels extends RecyclerView.Adapter<RecyclerView.ViewHolde
             stChannel.groot_id = grootId;
             LocalDataBase.saveChannels(context, stChannel);
             Toast.makeText(context, "افزوده شد.", Toast.LENGTH_SHORT).show();
+            stChannel.img = null;
             dialog.cancel();
         }
     }
@@ -228,7 +229,7 @@ public class AdapterChannels extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void dataFromActivity(Intent data, int reqCode) {
         stChannel.img = data.getStringExtra("path");
         dialogImg.setVisibility(View.VISIBLE);
-        G.setImageFromPhone(context, stChannel.img, dialogImg);
+        G.setImageFromPhone(context, stChannel.img, dialogImg,true);
 
     }
 }
